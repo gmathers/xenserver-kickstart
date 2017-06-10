@@ -28,9 +28,9 @@ timezone --utc Etc/UTC
 
 # Authentication
 rootpw --disabled
-user ubuntu --fullname "Ubuntu User" --password Asdfqwerty
+# user ubuntu --fullname "Ubuntu User" --password Asdfqwerty
 # if you want to preset the root password in a public kickstart file, use SHA512crypt e.g.
-# user ubuntu --fullname "Ubuntu User" --iscrypted --password $6$9dC4m770Q1o$FCOvPxuqc1B22HM21M5WuUfhkiQntzMuAV7MY0qfVcvhwNQ2L86PcnDWfjDd12IFxWtRiTuvO/niB0Q3Xpf2I.
+user systemadmin --fullname "systemadmin" --iscrypted --password $6$d467390273916916$ApKpWjNGk.dPtfvQPhfuFw.jY5FkPqGZSjBprOgyySzVurTvsx6aAxmvTIgvifqhfGl.paWSSilXdN1nCMyKa/
 auth --useshadow
 
 # Disable anything graphical
@@ -107,17 +107,17 @@ echo .
 
 # fix boot for older pygrub/XenServer
 # you should comment out this entire section if on XenServer Creedence/Xen 4.4
-echo -n "Fixing boot"
-cp /boot/grub/grub.cfg /boot/grub/grub.cfg.bak
-cp /etc/default/grub /etc/default/grub.bak
-cp --no-preserve=mode /etc/grub.d/00_header /etc/grub.d/00_header.bak
-sed -i 's/GRUB_DEFAULT=saved/GRUB_DEFAULT=0/' /etc/default/grub
-sed -i 's/default="\\${next_entry}"/default="0"/' /etc/grub.d/00_header
-echo -n "."
-cp --no-preserve=mode /etc/grub.d/10_linux /etc/grub.d/10_linux.bak
-sed -i 's/${sixteenbit}//' /etc/grub.d/10_linux
-echo -n "."
-update-grub
-echo .
+# echo -n "Fixing boot"
+# cp /boot/grub/grub.cfg /boot/grub/grub.cfg.bak
+# cp /etc/default/grub /etc/default/grub.bak
+# cp --no-preserve=mode /etc/grub.d/00_header /etc/grub.d/00_header.bak
+# sed -i 's/GRUB_DEFAULT=saved/GRUB_DEFAULT=0/' /etc/default/grub
+# sed -i 's/default="\\${next_entry}"/default="0"/' /etc/grub.d/00_header
+# echo -n "."
+# cp --no-preserve=mode /etc/grub.d/10_linux /etc/grub.d/10_linux.bak
+# sed -i 's/${sixteenbit}//' /etc/grub.d/10_linux
+# echo -n "."
+# update-grub
+# echo .
 
 %end
