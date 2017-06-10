@@ -55,6 +55,10 @@ openssh-server
 screen
 curl
 wget
+nano
+git
+software-properties-common
+ufw
 xenstore-utils
 linux-image-virtual
 
@@ -88,6 +92,11 @@ cat > /etc/hosts << EOF
 EOF
 echo .
 
+echo -n "ufw basic setup"
+ufw allow ssh
+ufw enable
+echo .
+
 # utility scripts
 echo -n "Utility scripts"
 wget -O /opt/domu-hostname.sh https://github.com/frederickding/xenserver-kickstart/raw/develop/opt/domu-hostname.sh
@@ -104,20 +113,5 @@ rm -f /var/cache/apt/archives/*.deb
 rm -f /var/cache/apt/*cache.bin
 rm -f /var/lib/apt/lists/*_Packages
 echo .
-
-# fix boot for older pygrub/XenServer
-# you should comment out this entire section if on XenServer Creedence/Xen 4.4
-# echo -n "Fixing boot"
-# cp /boot/grub/grub.cfg /boot/grub/grub.cfg.bak
-# cp /etc/default/grub /etc/default/grub.bak
-# cp --no-preserve=mode /etc/grub.d/00_header /etc/grub.d/00_header.bak
-# sed -i 's/GRUB_DEFAULT=saved/GRUB_DEFAULT=0/' /etc/default/grub
-# sed -i 's/default="\\${next_entry}"/default="0"/' /etc/grub.d/00_header
-# echo -n "."
-# cp --no-preserve=mode /etc/grub.d/10_linux /etc/grub.d/10_linux.bak
-# sed -i 's/${sixteenbit}//' /etc/grub.d/10_linux
-# echo -n "."
-# update-grub
-# echo .
 
 %end
