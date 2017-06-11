@@ -9,8 +9,8 @@ install
 url --url http://us.archive.ubuntu.com/ubuntu/
 
 # Language and keyboard setup
-lang en_US
-langsupport en_US
+lang en_US.UTF-8
+langsupport en_US.UTF-8
 keyboard us
 
 # Configure networking without IPv6, firewall off
@@ -74,6 +74,9 @@ echo -n "/etc/fstab fixes"
 perl -pi -e 's/(errors=remount-ro)/noatime,nodiratime,$1,barrier=0/' /etc/fstab
 echo .
 
+echo -n "set swappiness for server"
+echo "vm.swappiness=10" > /etc/sysctl.conf
+
 echo -n "Network fixes"
 # For cloud images, 'eth0' _is_ the predictable device name, since
 # we don't want to be tied to specific virtual (!) hardware
@@ -82,11 +85,11 @@ ln -s /dev/null /etc/udev/rules.d/80-net-name-slot.rules
 echo .
 
 # generic localhost names
-echo "localhost.localdomain" > /etc/hostname
+echo "localhost" > /etc/hostname
 echo .
 cat > /etc/hosts << EOF
-127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+127.0.0.1   localhost 
+::1         localhost 
 
 EOF
 echo .
