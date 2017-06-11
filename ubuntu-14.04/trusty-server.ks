@@ -24,7 +24,7 @@ network --bootproto=dhcp --device=eth0
 firewall --enabled --ssh
 
 # Set timezone
-timezone --utc Etc/UTC
+timezone America/Regina
 
 # Authentication
 rootpw --disabled
@@ -59,7 +59,6 @@ nano
 git
 software-properties-common
 ufw
-xenstore-utils
 linux-image-virtual
 
 %post
